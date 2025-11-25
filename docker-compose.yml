@@ -7,7 +7,7 @@ services:
       MOODLECFG_SSLPROXY: true
       MOODLE_DBTYPE: mysqli
       MOODLE_DBPORT: 3306
-      MOODLE_DBHOST: moodle-db
+      MOODLE_DBHOST: mysql
       MOODLE_DBNAME: database
       MOODLE_DBUSER: administrator
       MOODLE_DBPASS: password
