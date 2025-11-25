@@ -1,0 +1,38 @@
+services:
+  moodle:
+    image: venatorfox/moodle
+    container_name: moodle-app
+    environment:
+      MOODLE_WWWROOT: https://moodle.example.com
+      MOODLECFG_SSLPROXY: true
+      MOODLE_DBTYPE: mysqli
+      MOODLE_DBPORT: 3306
+      MOODLE_DBHOST: moodle-db
+      MOODLE_DBNAME: database
+      MOODLE_DBUSER: administrator
+      MOODLE_DBPASS: password
+      MOODLE_ADMINUSER: administrator
+      MOODLE_ADMINPASS: password
+    ports:
+      - "80:80"
+    volumes:
+      - /srv/data/moodle-app:/var/moodledata
+    depends_on:
+      - mysql
+    networks:
+      - moodle-net
+  mysql:
+    image: mysql:5.7
+    container_name: moodle-db
+    environment: 
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: database
+      MYSQL_USER: administrator
+      MYSQL_PASSWORD: password
+    volumes:
+      - /srv/data/moodle-db:/var/lib/mysql
+    networks:
+      - moodle-net
+networks:
+  moodle-net:
+    driver: bridge
